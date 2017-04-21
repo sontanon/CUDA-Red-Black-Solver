@@ -1,0 +1,15 @@
+Since the program has been divided into multiple files, each .cu file must me compiled into an object file
+and when all object files are ready, they can be compiled into an executable.
+
+Each object file must be compiled as 
+
+$ nvcc -arch=sm_20 -dc -I. file.cu -o file.obj
+
+The reason for separate file compilation is that there are __device__ functions that must be dealt as 
+mentioned in the following link: 
+
+https://devblogs.nvidia.com/parallelforall/separate-compilation-linking-cuda-device-code/
+
+As already said, after compiling all objects we compile the executable as:
+
+$ nvcc -arch=sm_20 file1.obj file2.obj ... fileN.obj -o app.exe
